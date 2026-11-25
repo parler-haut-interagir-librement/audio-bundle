@@ -4,9 +4,24 @@ All notable changes to `phil/audio-bundle` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](https://keepachangelog.com/) principles.
 
-## 0.1.1-alpha - 2026-11-18
+## 0.1.2-alpha - 2026-11-25
 
-The next version is 0.1.1-alpha.
+### Changed
+
+- The Node tests resolve `@hotwired/stimulus` to their stub with a synchronous hook given to `module.registerHooks()`,
+  on the loading thread, instead of `module.register()`, which Node deprecates (DEP0205).
+- The development requirements ask for the latest minor of each dependency (`twig/twig` 3.31,
+  `symfony/ux-twig-component` 3.8).
+- The development requirements take `twig/twig` 3.31.1 or later, which fixes the advisories of its sandbox published on
+  2026-11-24.
+
+### Fixed
+
+- The compiler pass that removes Messenger handlers runs before the one of
+  `symfony/messenger`, which Symfony 8.2.0-RC1 registers in its own bundle at the default priority: the container no
+  longer fails to build with a handler locator that names a removed service.
+
+## 0.1.1-alpha - 2026-11-18
 
 ### Changed
 
